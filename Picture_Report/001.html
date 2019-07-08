@@ -1,0 +1,74 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+    * {box-sizing: border-box;}
+    .row .col {
+        width: 12%;
+        background-color: #0f0;
+        border: 10px solid #fff;
+    }
+    h1 {
+        font-size: 30pt;
+        text-align:center;
+    }
+    h2 {
+        text-align:center;
+    }
+    body {
+        background-color: #E6E6D6;
+    }
+/*    p {
+        background-color: #6c6;
+    }*/
+
+</style>
+<script type="text/javascript">
+function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){
+    var sourceObj = typeof oSourceObj == "string" ? document.getElementById(oSourceObj) : oSourceObj;
+    var targetObj = typeof oTargetObj == "string" ? document.getElementById(oTargetObj) : oTargetObj;
+    var openTip = oOpenTip || "";
+    var shutTip = oShutTip || "";
+    if(targetObj.style.display!="none"){
+       if(shutAble) return;
+       targetObj.style.display="none";
+       if(openTip  &&  shutTip){
+        sourceObj.innerHTML = shutTip; 
+       }
+    } else {
+       targetObj.style.display="block";
+       if(openTip  &&  shutTip){
+        sourceObj.innerHTML = openTip; 
+       }
+    }
+}
+</script>
+<title>Test Report</title>
+</head>
+<body>
+<h1>Android Automated Test Report</h1>
+<h2><a href="###" onclick="openShutManager(this,'Android Test001')">Android Test001</a></h2>
+<p class="row" id="Android Test001" style="display:none">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+</p>
+<h2><a href="###" onclick="openShutManager(this,'Android Test002')">Android Test00222</a></h2>
+<p class="row" id="Android Test002" style="display:none">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+    <img class="col" src="step_screenshot/001/iOS12_P001_2019-06-14-15-04-07.png">
+</p>
+</body>
+</html>

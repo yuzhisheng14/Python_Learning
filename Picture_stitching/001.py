@@ -9,9 +9,12 @@ os.chdir('step_screenshot')
 IMAGES_FORMAT = '.png'
 # IMAGE転換結果ファイル
 IMAGE_SAVE_PATH = '../final.jpg'
+# ファイルをソートする
+filenames = listdir()
+filenames.sort()
 
 # ファイル名取得する
-images = [Image.open(fn) for fn in listdir() if fn.endswith(IMAGES_FORMAT)]
+images = [Image.open(fn) for fn in filenames if fn.endswith(IMAGES_FORMAT)]
 
 # 列
 IMAGE_COLUMN = 4
