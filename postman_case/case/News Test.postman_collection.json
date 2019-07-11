@@ -1,0 +1,1490 @@
+{
+	"info": {
+		"_postman_id": "8f23e522-90f2-41d3-aa91-ad186ebd4259",
+		"name": "News Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "News API Test",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de1db7f8-9f8c-4d8c-99ed-0b2d3bb0e612",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=23&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=23&ver=2147483648",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "2147483648"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=23&ver=-2147483649",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "-2147483649"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=23&ver=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=2147483648&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "2147483648"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=-2147483649&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "-2147483649"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d4d396-b222-4e34-86da-a86c0db3be47",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/list?code=100ads&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"list"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100ads"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lock Screen News API Test",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=23&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=23&ver=2147483648",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "2147483648"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=23&ver=-2147483649",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "-2147483649"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=23&ver=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=2147483648&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "2147483648"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=-2147483649&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "-2147483649"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3299c751-38b4-423a-89c7-28ecb330d292",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/lockscreen?code=100ads&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100ads"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lock Screen News API Test (Guest)",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=23&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=23&ver=2147483648",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "2147483648"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=23&ver=-2147483649",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "-2147483649"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=23&ver=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=2147483648&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "2147483648"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=-2147483649&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "-2147483649"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d7db2de-6d0f-4d2c-882f-152633b08e3d",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/guest/lockscreen?code=100ads&ver=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100ads"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News Count API Test",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ac40d70-6662-4d49-a03a-f5fb1c08ce02",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/news/count?code=100asd&ver=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"news",
+								"count"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100asd"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

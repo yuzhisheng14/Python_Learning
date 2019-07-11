@@ -1,0 +1,3816 @@
+{
+	"info": {
+		"_postman_id": "6fe120a6-3afa-47c7-ab5d-24391668e426",
+		"name": "Ads Test (Guest)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Daily Ads API  Test (Guest)",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=9007199254740992&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "9007199254740992"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=-9007199254740992&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "-9007199254740992"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=100asd&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "100asd"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=9007199254740992&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "9007199254740992"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=-9007199254740992&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "-9007199254740992"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=100ads&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "100ads"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=2147483648&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "2147483648"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=-2147483649&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "-2147483649"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1ads&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1ads"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=2147483648&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "2147483648"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=-2147483649&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "-2147483649"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=100ads&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100ads"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : limit is greater than max value 100\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=101",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : limit is less than min value 0\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=-1",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : Failed to convert property value of type java.lang.String to required type java.lang.Integer for property limit; nested exception is java.lang.NumberFormatException: For input string: \\\"\" + query.limit + \"\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => { ",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : offset is greater than max value 99999\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=100000&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "100000"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : offset is less than min value 0\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=-1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "-1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : Failed to convert property value of type java.lang.String to required type java.lang.Integer for property offset; nested exception is java.lang.NumberFormatException: For input string: \\\"\" + query.offset + \"\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=100ads&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "100ads"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=2147483648&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "2147483648"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=-2147483649&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "-2147483649"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => { ",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/daily?code=23&ver=100ads&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Free Contents API Test (Guest)",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6842fb6-20ee-4935-91b2-e40a1c90f2ec",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/freeContents",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"freeContents"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lock Screen Ads API Test (Guest)",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=9007199254740992&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "9007199254740992"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=-9007199254740992&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "-9007199254740992"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lat_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=100asd&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "100asd"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=9007199254740992&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "9007199254740992"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=-9007199254740992&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "-9007199254740992"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (lng_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=100ads&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "100ads"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=2147483648&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "2147483648"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=-2147483649&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "-2147483649"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (plt_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1ads&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1ads"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=2147483648&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "2147483648"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=-2147483649&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "-2147483649"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (code_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=100ads&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "100ads"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : limit is greater than max value 100\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=101",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : limit is less than min value 0\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=-1",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (limit_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"limit : Failed to convert property value of type java.lang.String to required type java.lang.Integer for property limit; nested exception is java.lang.NumberFormatException: For input string: \\\"\" + query.limit + \"\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100ads",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100ads"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => { ",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : offset is greater than max value 99999\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=100000&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "100000"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : offset is less than min value 0\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=-1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "-1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (offset_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"offset : Failed to convert property value of type java.lang.String to required type java.lang.Integer for property offset; nested exception is java.lang.NumberFormatException: For input string: \\\"\" + query.offset + \"\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100&plt=1&lat=35.658582&lng=139.745464&offset=100ads&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "100ads"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_max)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=2147483648&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "2147483648"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=-2147483649&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "-2147483649"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (ver_format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91317c7b-d52b-4804-b8ac-9df2e1e4dad2",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => { ",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"request parameters is wrong.\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Screen-Platform",
+								"value": "{{platform}}"
+							}
+						],
+						"url": {
+							"raw": "{{01api}}/{{apiver}}/ads/guest/lockscreen?code=23&ver=100ads&plt=1&lat=35.658582&lng=139.745464&offset=1&limit=100",
+							"host": [
+								"{{01api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"ads",
+								"guest",
+								"lockscreen"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "23"
+								},
+								{
+									"key": "ver",
+									"value": "100ads"
+								},
+								{
+									"key": "plt",
+									"value": "1"
+								},
+								{
+									"key": "lat",
+									"value": "35.658582"
+								},
+								{
+									"key": "lng",
+									"value": "139.745464"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

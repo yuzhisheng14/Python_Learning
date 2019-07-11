@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "7e0bca83-5411-4541-823f-4d2eaed3dfe9",
+		"name": "Resources Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Address Search API Test",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06d6daf6-5c6a-432c-acaf-adc19bbebfa5",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{02api}}/{{apiver}}/resources/searchAddress?zipCode=1400002",
+							"host": [
+								"{{02api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"resources",
+								"searchAddress"
+							],
+							"query": [
+								{
+									"key": "zipCode",
+									"value": "1400002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (exceed)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06d6daf6-5c6a-432c-acaf-adc19bbebfa5",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"zipCode : must match \\\"^[0-9]{7}$\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{02api}}/{{apiver}}/resources/searchAddress?zipCode=123456789",
+							"host": [
+								"{{02api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"resources",
+								"searchAddress"
+							],
+							"query": [
+								{
+									"key": "zipCode",
+									"value": "123456789"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Error Case (format)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06d6daf6-5c6a-432c-acaf-adc19bbebfa5",
+								"exec": [
+									"// API Response取得",
+									"var jsonData = pm.response.json();",
+									"// API Params取得",
+									"var query = {};",
+									"pm.request.url.query.all().forEach((param) => {",
+									"    query[param.key] = param.value",
+									"});",
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 400\", function() {",
+									"    // pm.response.to.be.clientError",
+									"    pm.expect(jsonData.errors.error_code).to.eql(400)",
+									"});",
+									"// API Error typeチェック",
+									"pm.test(\"Error type is true\", function() {",
+									"    pm.expect(jsonData.errors.error).to.eql(\"Wrong Parameter\")",
+									"});",
+									"// API Error descriptionチェック",
+									"pm.test(\"Error description is true\", function() {",
+									"    pm.expect(jsonData.errors.error_description).to.eql(\"zipCode : must match \\\"^[0-9]{7}$\\\"\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{02api}}/{{apiver}}/resources/searchAddress?zipCode=as1dasd",
+							"host": [
+								"{{02api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"resources",
+								"searchAddress"
+							],
+							"query": [
+								{
+									"key": "zipCode",
+									"value": "as1dasd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interests Genre API Test",
+			"item": [
+				{
+					"name": "Regular Case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a5d81f-8037-4c3b-bd26-dc9d59c5d41e",
+								"exec": [
+									"// API Status codeチェック",
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{02api}}/{{apiver}}/resources/interestsGenre",
+							"host": [
+								"{{02api}}"
+							],
+							"path": [
+								"{{apiver}}",
+								"resources",
+								"interestsGenre"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
